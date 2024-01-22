@@ -1,14 +1,16 @@
 name: flutter_bioskop
-description: "A new Flutter project."
-publish_to: 'none'
+description: "Bioskop Nonton ID: Pesan Tiket Bioskop menjadi lebih mudah."
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.2.1 <4.0.0'
+  sdk: ">=3.2.1 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
