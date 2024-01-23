@@ -19,8 +19,6 @@ InputDecorationTheme inputDecorationTheme() {
     filled: true,
     fillColor: primaryAccent,
     hintStyle: TextStyle(color: Colors.grey[700]),
-    counterStyle: const TextStyle(color: Colors.white),
-    prefixIconColor: Colors.grey[700],
     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),

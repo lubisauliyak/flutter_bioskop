@@ -1,28 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bioskop/layouts/signup_screen.dart';
+import 'package:flutter_bioskop/layouts/login_screen.dart';
 import 'package:flutter_bioskop/utils/decoration_config.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerUsername = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerRePassword = TextEditingController();
 
   @override
   void dispose() {
+    _controllerEmail.dispose();
     _controllerUsername.dispose();
     _controllerPassword.dispose();
+    _controllerRePassword.dispose();
     super.dispose();
   }
 
+  String email = '';
   String username = '';
   String password = '';
+  String rePassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +42,34 @@ class _LoginScreenState extends State<LoginScreen> {
               Image.asset('assets/images/nonton_id.png'),
               const SizedBox(height: 80),
               const Text(
-                'Masuk',
+                'Daftar',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: TextField(
+                    controller: _controllerEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'alamat email',
+                      prefixIcon: Icon(
+                        CupertinoIcons.mail,
+                        color:
+                            email.isNotEmpty ? Colors.white : Colors.grey[700],
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        email = value;
+                      });
+                    },
+                  )),
+              const SizedBox(height: 5),
               Container(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: TextField(
@@ -87,22 +114,45 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                   )),
+              const SizedBox(height: 5),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: TextField(
+                    controller: _controllerRePassword,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'ulangi kata sandi',
+                      prefixIcon: Icon(
+                        CupertinoIcons.lock,
+                        color: (rePassword.isNotEmpty && password == rePassword)
+                            ? Colors.white
+                            : Colors.grey[700],
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        rePassword = value;
+                      });
+                    },
+                  )),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.only(left: 40),
                 child: Row(
                   children: [
                     Text(
-                      'Belum Punya Akun? ',
+                      'Sudah Punya Akun? ',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const SignupScreen()));
+                            builder: (context) => const LoginScreen()));
                       },
                       child: const Text(
-                        'Daftar',
+                        'Masuk',
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -128,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: secondaryColor,
           ),
           child: const Text(
-            'Masuk',
+            'Daftar',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
