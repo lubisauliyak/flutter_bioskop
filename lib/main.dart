@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bioskop/layouts/splash_screen.dart';
+import 'package:flutter_bioskop/screens/splash_screen.dart';
 import 'package:flutter_bioskop/utils/decoration_config.dart';
 
 void main() {
