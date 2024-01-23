@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bioskop/layouts/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,6 +10,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -17,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
             height: double.infinity,
             width: double.infinity,
             alignment: Alignment.topCenter,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/splash_image.png'),
                     fit: BoxFit.cover)),
