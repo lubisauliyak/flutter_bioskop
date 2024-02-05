@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bioskop/layouts/login_screen.dart';
+import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
+import 'package:flutter_bioskop/screens/auth/login_screen.dart';
 import 'package:flutter_bioskop/utils/decoration_config.dart';
+import 'package:flutter_bioskop/utils/image_dir.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  static const routeName = '/register-screen';
+  const RegisterScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<RegisterScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends State<RegisterScreen> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerUsername = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
@@ -39,7 +42,7 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             children: [
               const SizedBox(height: 100),
-              Image.asset('assets/images/nonton_id.png'),
+              Image.asset(ImageDir.logoApp),
               const SizedBox(height: 80),
               const Text(
                 'Daftar',
@@ -148,8 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const LoginScreen()));
+                        BioskopNavigation().pop();
                       },
                       child: const Text(
                         'Masuk',
@@ -170,7 +172,9 @@ class _SignupScreenState extends State<SignupScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         margin: const EdgeInsets.only(bottom: 20),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _onTapButtonRegister();
+          },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -184,5 +188,9 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  void _onTapButtonRegister() {
+    BioskopNavigation().pop();
   }
 }

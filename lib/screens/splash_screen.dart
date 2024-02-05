@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bioskop/screens/login_screen.dart';
+import 'package:flutter_bioskop/screens/auth/login_screen.dart';
+import 'package:flutter_bioskop/utils/image_dir.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/splash-screen';
   const SplashScreen({super.key});
 
   @override
@@ -29,12 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.topCenter,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/splash_image.png'),
+                    image: AssetImage(ImageDir.splashImage),
                     fit: BoxFit.cover)),
             child: Column(
               children: [
                 const SizedBox(height: 100),
-                Image.asset('assets/images/nonton_id.png'),
+                Image.asset(ImageDir.logoApp),
               ],
             )),
       )),

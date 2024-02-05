@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bioskop/layouts/signup_screen.dart';
+import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
+import 'package:flutter_bioskop/screens/auth/register_screen.dart';
 import 'package:flutter_bioskop/utils/decoration_config.dart';
+import 'package:flutter_bioskop/utils/image_dir.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
@@ -33,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               const SizedBox(height: 100),
-              Image.asset('assets/images/nonton_id.png'),
+              Image.asset(ImageDir.logoApp),
               const SizedBox(height: 80),
               const Text(
                 'Masuk',
@@ -98,8 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const SignupScreen()));
+                        BioskopNavigation().pushNamed(RegisterScreen.routeName);
                       },
                       child: const Text(
                         'Daftar',
@@ -120,7 +122,9 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         margin: const EdgeInsets.only(bottom: 20),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _onTapButtonLogin();
+          },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -135,4 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  void _onTapButtonLogin() {}
 }
