@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/screens/auth/register_screen.dart';
-import 'package:flutter_bioskop/utils/decoration_config.dart';
+import 'package:flutter_bioskop/screens/menu/home_screen.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
+import 'package:flutter_bioskop/utils/widgets/bioskop_button.dart';
+import 'package:flutter_bioskop/utils/widgets/bioskop_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
@@ -41,104 +43,73 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text(
                 'Masuk',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 20),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: TextField(
-                    controller: _controllerUsername,
-                    keyboardType: TextInputType.text,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'username',
-                      prefixIcon: Icon(
-                        CupertinoIcons.person,
-                        color: username.isNotEmpty
-                            ? Colors.white
-                            : Colors.grey[700],
-                      ),
-                    ),
-                    onChanged: (String value) {
-                      setState(() {
-                        username = value;
-                      });
-                    },
-                  )),
+              BioskopTextField().textFieldAuth(
+                  hintText: 'username',
+                  varText: username,
+                  icon: CupertinoIcons.person,
+                  controller: _controllerUsername,
+                  type: TextInputType.text,
+                  onChanged: (String value) {
+                    setState(() {
+                      username = value;
+                    });
+                  }),
               const SizedBox(height: 5),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: TextField(
-                    controller: _controllerPassword,
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'kata sandi',
-                      prefixIcon: Icon(
-                        CupertinoIcons.lock,
-                        color: password.isNotEmpty
-                            ? Colors.white
-                            : Colors.grey[700],
-                      ),
-                    ),
-                    onChanged: (String value) {
-                      setState(() {
-                        password = value;
-                      });
-                    },
-                  )),
+              BioskopTextField().textFieldPassword(
+                  hintText: 'kata sandi',
+                  varText: password,
+                  icon: CupertinoIcons.lock,
+                  controller: _controllerPassword,
+                  onChanged: (String value) {
+                    setState(() {
+                      password = value;
+                    });
+                  }),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.only(left: 40),
                 child: Row(
                   children: [
                     Text(
-                      'Belum Punya Akun? ',
+                      'Belum punya akun? ',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     GestureDetector(
                       onTap: () {
                         BioskopNavigation().pushNamed(RegisterScreen.routeName);
                       },
-                      child: const Text(
-                        'Daftar',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                      child: const Text('Daftar disini',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          )),
                     )
                   ],
                 ),
-              )
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
       ),
       bottomNavigationBar: Container(
-        width: double.infinity,
-        height: 50,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        margin: const EdgeInsets.only(bottom: 20),
-        child: ElevatedButton(
-          onPressed: () {
-            _onTapButtonLogin();
-          },
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            backgroundColor: secondaryColor,
-          ),
-          child: const Text(
-            'Masuk',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
+          width: double.infinity,
+          height: 50,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.only(bottom: 20),
+          child: BioskopButton()
+              .buttonAuth(text: 'Masuk', onTap: _onTapButtonLogin)),
     );
   }
 
-  void _onTapButtonLogin() {}
+  void _onTapButtonLogin() {
+    BioskopNavigation().pushReplacementNamed(HomeScreen.routeName);
+  }
 }
