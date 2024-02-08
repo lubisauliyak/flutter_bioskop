@@ -30,6 +30,7 @@ flutter:
     - assets/images/dashboard/
     - assets/images/content/
     - assets/svg/
+    - assets/svg/profile/
 
   fonts:
     - family: Poppins
