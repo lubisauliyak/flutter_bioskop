@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/screens/auth/register_screen.dart';
 import 'package:flutter_bioskop/screens/menu/home_screen.dart';
+import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_button.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_textfield.dart';
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text(
                 'Masuk',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorDir.whiteColor,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       'Belum punya akun? ',
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(color: ColorDir.whiteAccent2),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: const Text('Daftar disini',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ColorDir.whiteColor,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           )),

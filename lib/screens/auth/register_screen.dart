@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
+import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_button.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_textfield.dart';
@@ -46,7 +47,7 @@ class _SignupScreenState extends State<RegisterScreen> {
               const SizedBox(height: 80),
               const Text('Daftar',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorDir.whiteColor,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   )),
@@ -103,7 +104,7 @@ class _SignupScreenState extends State<RegisterScreen> {
                   children: [
                     Text(
                       'Sudah punya akun? ',
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(color: ColorDir.whiteAccent2),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -112,7 +113,7 @@ class _SignupScreenState extends State<RegisterScreen> {
                       child: const Text(
                         'Masuk disini',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColorDir.whiteColor,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),

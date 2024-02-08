@@ -18,8 +18,8 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-
     MovieShowModel movieModel = arguments['movieModel'] as MovieShowModel;
+
     return Scaffold(
       body: Expanded(
         child: SingleChildScrollView(
@@ -27,7 +27,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 400,
+                height: 410,
                 width: double.infinity,
                 child: Stack(
                   children: [
@@ -46,12 +46,12 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                       ),
                       child: Icon(
                         Icons.play_circle,
-                        color: Colors.white.withOpacity(0.4),
+                        color: ColorDir.whiteAccent4,
                         size: 80,
                       ),
                     ),
                     Positioned(
-                      top: 170,
+                      top: 175,
                       left: 20,
                       child: Container(
                         width: 150,
@@ -84,7 +84,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                             Text(
                               movieModel.title,
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: ColorDir.whiteColor,
                                   fontSize: 28,
                                   height: 1.2,
                                   fontWeight: FontWeight.bold),
@@ -97,23 +97,19 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                                   children: [
                                     Text('Produser',
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.2))),
+                                            color: ColorDir.whiteAccent2)),
                                     const SizedBox(height: 2),
                                     Text('Penulis',
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.2))),
+                                            color: ColorDir.whiteAccent2)),
                                     const SizedBox(height: 2),
                                     Text('Genre',
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.2))),
+                                            color: ColorDir.whiteAccent2)),
                                     const SizedBox(height: 2),
                                     Text('PH',
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.2))),
+                                            color: ColorDir.whiteAccent2)),
                                   ],
                                 ),
                                 const SizedBox(width: 10),
@@ -122,26 +118,22 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                                   children: [
                                     Text(movieModel.detail.director,
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.5))),
+                                            color: ColorDir.whiteAccent4)),
                                     const SizedBox(height: 2),
                                     Text(movieModel.detail.writer,
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.5))),
+                                            color: ColorDir.whiteAccent4)),
                                     const SizedBox(height: 2),
                                     Text(movieModel.detail.genre,
                                         style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.5))),
+                                            color: ColorDir.whiteAccent4)),
                                     const SizedBox(height: 2),
                                     SizedBox(
                                       width: 120,
                                       child: Text(movieModel.detail.ph,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                              color: Colors.white
-                                                  .withOpacity(0.5))),
+                                              color: ColorDir.whiteAccent4)),
                                     ),
                                   ],
                                 ),
@@ -183,7 +175,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                               itemSize: 14,
                               itemBuilder: (context, _) => const Icon(
                                 Icons.star,
-                                color: Colors.amber,
+                                color: ColorDir.yellowColor,
                               ),
                               onRatingUpdate: (rating) {},
                             ),
@@ -191,7 +183,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                             Text(
                               '${movieModel.rating}/10',
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: ColorDir.whiteColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -217,13 +209,12 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                           children: [
                             Text(
                               'Durasi',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.2)),
+                              style: TextStyle(color: ColorDir.whiteAccent4),
                             ),
                             Text(
                               movieModel.detail.duration,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: ColorDir.whiteColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -249,13 +240,12 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                           children: [
                             Text(
                               'P-G',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.2)),
+                              style: TextStyle(color: ColorDir.whiteAccent4),
                             ),
                             Text(
                               movieModel.detail.pg,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: ColorDir.whiteColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -267,7 +257,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 32),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -277,16 +267,16 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                     const Text(
                       'Sinopsis',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: ColorDir.whiteColor,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     Text(
                       movieModel.detail.description,
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.4), fontSize: 14),
+                      style:
+                          TextStyle(color: ColorDir.whiteAccent4, fontSize: 14),
                     )
                   ],
                 ),
@@ -304,10 +294,11 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
           margin: const EdgeInsets.only(bottom: 20, top: 10),
           child: BioskopButton().buttonPrimary(
               text: 'Beli Tiket',
-              onTap: _onTapButtonOrderTiket,
+              onTap: () {
+                Navigator.pushNamed(context, '/buy-ticket-screen',
+                    arguments: {'movieModel': movieModel});
+              },
               icon: CupertinoIcons.ticket)),
     );
   }
-
-  void _onTapButtonOrderTiket() {}
 }

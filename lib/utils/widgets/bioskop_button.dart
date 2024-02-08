@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bioskop/utils/color_dir.dart';
 
 class BioskopButton {
   Widget buttonAuth({required String text, required Function() onTap}) {
@@ -10,14 +11,14 @@ class BioskopButton {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             gradient: const LinearGradient(colors: [
-              Color(0xFF6C61AF),
-              Color(0xFF867AD2),
+              ColorDir.secondaryColor,
+              ColorDir.secondaryAccent,
             ])),
         child: Center(
           child: Text(
             text,
             style: const TextStyle(
-              color: Colors.white,
+              color: ColorDir.whiteColor,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -40,8 +41,8 @@ class BioskopButton {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             gradient: const LinearGradient(colors: [
-              Color(0xFF6C61AF),
-              Color(0xFF867AD2),
+              ColorDir.secondaryColor,
+              ColorDir.secondaryAccent,
             ])),
         child: Center(
           child: Row(
@@ -50,14 +51,14 @@ class BioskopButton {
               if (icon != null)
                 Row(
                   children: [
-                    Icon(icon, color: Colors.white),
+                    Icon(icon, color: ColorDir.whiteColor),
                     const SizedBox(width: 5),
                   ],
                 ),
               Text(
                 text,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: ColorDir.whiteColor,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,14 +79,14 @@ class BioskopButton {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             gradient: const LinearGradient(colors: [
-              Color(0xFF6C61AF),
-              Color(0xFF867AD2),
+              ColorDir.secondaryColor,
+              ColorDir.secondaryAccent,
             ])),
         child: Center(
           child: Text(
             text,
             style: const TextStyle(
-              color: Colors.white,
+              color: ColorDir.whiteColor,
               fontSize: 12,
               fontWeight: FontWeight.bold,
             ),

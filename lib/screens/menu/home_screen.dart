@@ -28,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: Container(
           margin: const EdgeInsets.only(left: 20),
-          child: Image.asset(ImageDir.dummyProfile),
+          child: const CircleAvatar(
+            radius: 20,
+            backgroundImage: AssetImage(ImageDir.dummyProfile),
+          ),
         ),
         centerTitle: true,
         title: const Row(
@@ -36,16 +39,16 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Icon(
               Icons.location_on_outlined,
-              color: Colors.white,
-              size: 16,
+              color: ColorDir.whiteColor,
+              size: 18,
             ),
             SizedBox(width: 4),
             Text(
               'Surabaya',
               style: TextStyle(
-                color: Colors.white,
+                color: ColorDir.whiteColor,
                 fontSize: 16,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
@@ -56,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Icon(
                 Icons.notifications_outlined,
-                color: Colors.white,
+                color: ColorDir.whiteColor,
               ),
               CircleAvatar(
                 radius: 5,
@@ -82,22 +85,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const Text('Sedang Tayang',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColorDir.whiteColor,
                           fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.bold,
                         )),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text('Lihat Semua',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
+                              color: ColorDir.whiteAccent6,
                               fontSize: 12,
                             )),
                         const SizedBox(width: 8),
                         Icon(
                           Icons.arrow_forward_ios,
-                          color: Colors.white.withOpacity(0.6),
+                          color: ColorDir.whiteAccent6,
                           size: 12,
                         ),
                       ],
@@ -122,13 +125,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 32),
               Container(
-                height: 3,
+                height: 2,
                 width: double.infinity,
                 color: ColorDir.primaryAccent,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -207,10 +210,10 @@ class _HomeScreenState extends State<HomeScreen> {
               allowHalfRating: true,
               itemCount: 5,
               itemSize: 16,
-              itemPadding: const EdgeInsets.only(right: 2),
+              itemPadding: const EdgeInsets.only(right: 1),
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
-                color: Colors.amber,
+                color: ColorDir.yellowColor,
               ),
               onRatingUpdate: (rating) {},
             ),
@@ -252,7 +255,6 @@ class _HomeScreenState extends State<HomeScreen> {
             }).toList(),
             carouselController: _controllerBanner,
             options: CarouselOptions(
-              autoPlay: true,
               enlargeCenterPage: true,
               aspectRatio: 2,
               viewportFraction: 0.7,

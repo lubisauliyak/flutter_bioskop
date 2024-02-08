@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
+import 'package:flutter_bioskop/screens/menu/profile_screen.dart';
 import 'package:flutter_bioskop/screens/splash_screen.dart';
 import 'package:flutter_bioskop/utils/decoration_config.dart';
 
@@ -15,7 +16,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: SplashScreen.routeName,
+      // initialRoute: SplashScreen.routeName,
+      initialRoute: ProfileScreen.routeName,
       routes: BioskopNavigation.routes,
       navigatorKey: BioskopNavigation.navigatorKey,
     );

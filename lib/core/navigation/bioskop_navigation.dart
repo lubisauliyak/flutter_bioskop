@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/screens/auth/login_screen.dart';
 import 'package:flutter_bioskop/screens/auth/register_screen.dart';
+import 'package:flutter_bioskop/screens/content/buy_ticket_screen.dart';
+import 'package:flutter_bioskop/screens/content/choose_seat_screen.dart';
 import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
 import 'package:flutter_bioskop/screens/menu/home_screen.dart';
+import 'package:flutter_bioskop/screens/menu/profile_screen.dart';
 import 'package:flutter_bioskop/screens/splash_screen.dart';
 
 class BioskopNavigation {
@@ -14,7 +17,10 @@ class BioskopNavigation {
     LoginScreen.routeName: (context) => const LoginScreen(),
     RegisterScreen.routeName: (context) => const RegisterScreen(),
     HomeScreen.routeName: (context) => const HomeScreen(),
+    ProfileScreen.routeName: (context) => const ProfileScreen(),
     DetailContentScreen.routeName: (context) => const DetailContentScreen(),
+    BuyTicketScreen.routeName: (context) => const BuyTicketScreen(),
+    ChooseSeatScreen.routeName: (context) => const ChooseSeatScreen(),
   };
 
   void pushNamed(String routeName, {Object? arguments}) {
