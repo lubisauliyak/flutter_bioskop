@@ -1,29 +1,22 @@
-class MovieShowModel {
+class MovieModel {
   String title;
   String image;
   String rating;
+  CategoryRelease category;
   DetailMovie detail;
 
-  MovieShowModel({
+  MovieModel({
     required this.title,
     required this.image,
     required this.rating,
+    required this.category,
     required this.detail,
   });
 }
 
-class MovieComingModel {
-  String title;
-  String image;
-  String rating;
-  DetailMovie detail;
-
-  MovieComingModel({
-    required this.title,
-    required this.image,
-    required this.rating,
-    required this.detail,
-  });
+enum CategoryRelease {
+  inComing,
+  upComing,
 }
 
 class DetailMovie {

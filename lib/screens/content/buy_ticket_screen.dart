@@ -4,6 +4,7 @@ import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/data/content/dummy_cinema.dart';
 import 'package:flutter_bioskop/models/content/cinema_model.dart';
 import 'package:flutter_bioskop/models/home/movie_model.dart';
+import 'package:flutter_bioskop/screens/content/choose_seat_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_button.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_textfield.dart';
@@ -28,12 +29,16 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
   List<bool> isSelectedCinema = List.filled(listCinema.length, false);
 
   List<String> showTime = ['12:15', '15:30', '18:00', '21:00'];
-  List<bool> isSelectedTime = [false, false, false, false];
-  List<bool> isExpiredTime = [true, false, false, false];
+  List<bool> isSelectedTime = [];
+  List<bool> isExpiredTime = [];
 
   @override
   void initState() {
     isSelectedCinema[0] = true;
+    isSelectedTime = List.filled(showTime.length, false);
+    isExpiredTime = List.filled(showTime.length, false);
+    isSelectedTime[1] = true;
+    isExpiredTime[0] = true;
     super.initState();
   }
 
@@ -41,7 +46,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    MovieShowModel movieModel = arguments['movieModel'] as MovieShowModel;
+    MovieModel movieModel = arguments['movieModel'] as MovieModel;
 
     return Scaffold(
       appBar: AppBar(
@@ -80,8 +85,10 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
-                  children: List.generate(listCinema.length,
-                      (index) => cardCinema(listCinema[index], index)),
+                  children: List.generate(
+                      listCinema.length,
+                      (index) => cardCinema(
+                          cinemaModel: listCinema[index], index: index)),
                 ),
               ),
               const SizedBox(height: 20),
@@ -98,13 +105,13 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           child: BioskopButton().buttonPrimary(
               text: 'Beli Tiket',
               onTap: () {
-                // Navigator.pushNamed(context, '/buy-ticket-screen',
-                //     arguments: {'movieModel': movieModel});
+                BioskopNavigation().pushNamed(ChooseSeatScreen.routeName,
+                    arguments: {'movieModel': movieModel});
               })),
     );
   }
 
-  Widget cardCinema(CinemaModel cinemaModel, int index) {
+  Widget cardCinema({required CinemaModel cinemaModel, required int index}) {
     return Column(
       children: [
         GestureDetector(
@@ -160,7 +167,8 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(
                         showTime.length,
-                        (index) => buttonShowTime(showTime[index], index),
+                        (index) =>
+                            buttonShowTime(text: showTime[index], index: index),
                       ),
                     ),
                   ],
@@ -171,7 +179,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
     );
   }
 
-  Widget buttonShowTime(String textShowTime, int index) {
+  Widget buttonShowTime({required String text, required int index}) {
     return GestureDetector(
       onTap: () {
         if (isExpiredTime[index] != true) {
@@ -194,7 +202,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           vertical: 6,
         ),
         child: Text(
-          textShowTime,
+          text,
           style: TextStyle(
               color: isExpiredTime[index]
                   ? ColorDir.whiteAccent4

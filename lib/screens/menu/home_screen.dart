@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/data/home/dummy_banner.dart';
-import 'package:flutter_bioskop/data/home/dummy_movie_show.dart';
+import 'package:flutter_bioskop/data/home/dummy_movie.dart';
 import 'package:flutter_bioskop/data/home/dummy_voucher.dart';
 import 'package:flutter_bioskop/models/home/banner_model.dart';
 import 'package:flutter_bioskop/models/home/movie_model.dart';
 import 'package:flutter_bioskop/models/home/voucher_model.dart';
+import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
+import 'package:flutter_bioskop/screens/content/movie_directory_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -24,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<MovieModel> inComingMovies = listMovie
+        .where((movie) => movie.category == CategoryRelease.inComing)
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         leading: Container(
@@ -89,21 +96,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         )),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text('Lihat Semua',
-                            style: TextStyle(
-                              color: ColorDir.whiteAccent6,
-                              fontSize: 12,
-                            )),
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: ColorDir.whiteAccent6,
-                          size: 12,
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        BioskopNavigation()
+                            .pushNamed(MovieDirectoryScreen.routeName);
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Lihat Semua',
+                              style: TextStyle(
+                                color: ColorDir.whiteAccent6,
+                                fontSize: 12,
+                              )),
+                          const SizedBox(width: 8),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: ColorDir.whiteAccent6,
+                            size: 12,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -116,9 +129,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 20),
                     Row(
                       children: List.generate(
-                        listMovieShow.length,
+                        inComingMovies.length,
                         (index) => cardMovie(
-                          listMovieShow[index],
+                          inComingMovies[index],
                         ),
                       ),
                     ),
@@ -169,13 +182,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget cardMovie(MovieShowModel movieModel) {
+  Widget cardMovie(MovieModel movieModel) {
     return Container(
       width: 150,
       margin: const EdgeInsets.only(right: 20),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/detail-content-screen',
+          BioskopNavigation().pushNamed(DetailContentScreen.routeName,
               arguments: {'movieModel': movieModel});
         },
         child: Column(

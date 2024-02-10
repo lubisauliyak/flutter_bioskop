@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/models/home/movie_model.dart';
+import 'package:flutter_bioskop/screens/content/buy_ticket_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/widgets/bioskop_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -18,7 +20,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    MovieShowModel movieModel = arguments['movieModel'] as MovieShowModel;
+    MovieModel movieModel = arguments['movieModel'] as MovieModel;
 
     return Scaffold(
       body: Expanded(
@@ -32,24 +34,25 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                 child: Stack(
                   children: [
                     Container(
-                      height: 200,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(movieModel.image),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.4),
-                            BlendMode.dstATop,
+                        height: 200,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(movieModel.image),
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.4),
+                              BlendMode.dstATop,
+                            ),
                           ),
                         ),
-                      ),
-                      child: Icon(
-                        Icons.play_circle,
-                        color: ColorDir.whiteAccent4,
-                        size: 80,
-                      ),
-                    ),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.play_circle,
+                              color: ColorDir.whiteAccent4,
+                              size: 80,
+                            ))),
                     Positioned(
                       top: 175,
                       left: 20,
@@ -62,12 +65,12 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
-                              color: Colors.black,
+                              color: Colors.black.withOpacity(0.2),
                               spreadRadius: 1,
                               blurRadius: 1,
-                              offset: Offset(0, 0),
+                              offset: const Offset(0, 0),
                             ),
                           ],
                         ),
@@ -83,6 +86,8 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                           children: [
                             Text(
                               movieModel.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: ColorDir.whiteColor,
                                   fontSize: 28,
@@ -113,29 +118,33 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
                                   ],
                                 ),
                                 const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(movieModel.detail.director,
-                                        style: TextStyle(
-                                            color: ColorDir.whiteAccent4)),
-                                    const SizedBox(height: 2),
-                                    Text(movieModel.detail.writer,
-                                        style: TextStyle(
-                                            color: ColorDir.whiteAccent4)),
-                                    const SizedBox(height: 2),
-                                    Text(movieModel.detail.genre,
-                                        style: TextStyle(
-                                            color: ColorDir.whiteAccent4)),
-                                    const SizedBox(height: 2),
-                                    SizedBox(
-                                      width: 120,
-                                      child: Text(movieModel.detail.ph,
+                                SizedBox(
+                                  width: 120,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(movieModel.detail.director,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: ColorDir.whiteAccent4)),
-                                    ),
-                                  ],
+                                      const SizedBox(height: 2),
+                                      Text(movieModel.detail.writer,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: ColorDir.whiteAccent4)),
+                                      const SizedBox(height: 2),
+                                      Text(movieModel.detail.genre,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: ColorDir.whiteAccent4)),
+                                      const SizedBox(height: 2),
+                                      Text(movieModel.detail.ph,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: ColorDir.whiteAccent4)),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -295,7 +304,7 @@ class _DetailContentScreenState extends State<DetailContentScreen> {
           child: BioskopButton().buttonPrimary(
               text: 'Beli Tiket',
               onTap: () {
-                Navigator.pushNamed(context, '/buy-ticket-screen',
+                BioskopNavigation().pushNamed(BuyTicketScreen.routeName,
                     arguments: {'movieModel': movieModel});
               },
               icon: CupertinoIcons.ticket)),

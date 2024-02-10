@@ -26,7 +26,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/images/auth/
+    - assets/images/profile/
     - assets/images/dashboard/
     - assets/images/content/
     - assets/svg/

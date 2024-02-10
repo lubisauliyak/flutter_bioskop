@@ -55,35 +55,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [
-                            Color(0xFFFFBC4F),
-                            Color(0xFFF9A01B),
-                          ]),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Member Gold',
-                              style: TextStyle(
-                                  color: ColorDir.whiteColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(width: 4),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 10,
-                              color: ColorDir.whiteColor,
-                            ),
-                          ],
-                        ),
-                      )
+                      buttonMemberGold(onTap: () {}),
                     ],
                   )
                 ],
@@ -100,8 +72,8 @@ class ProfileScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  cardIcon(title: 'Wallet', icon: SvgDir.wallet),
-                  cardIcon(title: 'Point', icon: SvgDir.point),
+                  cardIcon(title: 'Dompet', icon: SvgDir.wallet),
+                  cardIcon(title: 'Poin', icon: SvgDir.point),
                   cardIcon(title: 'Voucher', icon: SvgDir.voucher),
                   cardIcon(title: 'PayLater', icon: SvgDir.creditCard),
                 ],
@@ -126,29 +98,67 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget cardMenuProfile({required String title}) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      margin: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        color: ColorDir.primaryAccent,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: ColorDir.whiteColor,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          color: ColorDir.primaryAccent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: ColorDir.whiteColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          const Text('Lorem ipsum dolor sit amet, consectetur adipisci',
-              style: TextStyle(color: ColorDir.whiteColor, fontSize: 12))
-        ],
+            const SizedBox(height: 4),
+            const Text('Lorem ipsum dolor sit amet, consectetur adipisci',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: ColorDir.whiteColor, fontSize: 12))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buttonMemberGold({required Function() onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [
+            Color(0xFFFFBC4F),
+            Color(0xFFF9A01B),
+          ]),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Member Gold',
+              style: TextStyle(
+                  color: ColorDir.whiteColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 10,
+              color: ColorDir.whiteColor,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -159,16 +169,19 @@ class ProfileScreen extends StatelessWidget {
   }) {
     return Expanded(
       flex: 1,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SvgPicture.asset(icon),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(color: ColorDir.whiteColor),
-          )
-        ],
+      child: GestureDetector(
+        onTap: () {},
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SvgPicture.asset(icon),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: const TextStyle(color: ColorDir.whiteColor),
+            )
+          ],
+        ),
       ),
     );
   }
