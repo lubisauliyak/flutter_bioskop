@@ -138,8 +138,15 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           child: BioskopButton().buttonPrimary(
               text: 'Beli Tiket',
               onTap: () {
-                BioskopNavigation().pushNamed(ChooseSeatScreen.routeName,
-                    arguments: {'movieModel': movieModel});
+                BioskopNavigation()
+                    .pushNamed(ChooseSeatScreen.routeName, arguments: {
+                  'movieModel': movieModel,
+                  'cinemaModel': listCinema[
+                      isSelectedCinema.indexWhere((element) => element)],
+                  'selectedTime':
+                      showTime[isSelectedTime.indexWhere((element) => element)],
+                  'selectedDate': showDate[3],
+                });
               })),
     );
   }
@@ -182,22 +189,24 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                (!date.isBefore(today) && !date.isAfter(limitDaysLater))
-                    ? day
-                    : '',
+                day,
                 style: TextStyle(
-                    color: color,
+                    color:
+                        (!date.isBefore(today) && !date.isAfter(limitDaysLater))
+                            ? color
+                            : ColorDir.primaryAccent,
                     fontSize: (index == 3) ? 16 : 14,
                     fontWeight:
                         (index == 3) ? FontWeight.bold : FontWeight.normal),
               ),
               if (index == 3) const SizedBox(height: 6),
               Text(
-                (!date.isBefore(today) && !date.isAfter(limitDaysLater))
-                    ? date.toString().substring(8, 10)
-                    : '',
+                date.toString().substring(8, 10),
                 style: TextStyle(
-                    color: color,
+                    color:
+                        (!date.isBefore(today) && !date.isAfter(limitDaysLater))
+                            ? color
+                            : ColorDir.primaryAccent,
                     fontSize: (index == 3) ? 18 : 14,
                     fontWeight:
                         (index == 3) ? FontWeight.bold : FontWeight.normal),
