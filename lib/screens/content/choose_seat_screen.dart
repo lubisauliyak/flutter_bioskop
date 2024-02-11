@@ -33,20 +33,22 @@ class _ChooseSeatScreenState extends State<ChooseSeatScreen> {
     'Des'
   ];
   List<List<String>> listSeat = [];
-  List<List<bool>> isAvailableSeat = [];
+  List<String> availableSeat = [];
   List<String> selectedSeat = [];
 
   @override
   void initState() {
+    String currentSeat = '';
     for (var i = 0; i < 8; i++) {
       List<String> subListSeat = [];
-      List<bool> subListAvailable = [];
-      for (var j = 1; j <= 10; j++) {
-        subListSeat.add(String.fromCharCode(65 + i) + j.toString());
-        subListAvailable.add(Random().nextBool());
+      for (var j = 11; j <= 20; j++) {
+        currentSeat = String.fromCharCode(65 + i) + j.toString();
+        subListSeat.add(currentSeat);
+        if (Random().nextBool() == true) {
+          availableSeat.add(currentSeat);
+        }
       }
       listSeat.add(subListSeat);
-      isAvailableSeat.add(subListAvailable);
     }
     super.initState();
   }
@@ -216,7 +218,7 @@ class _ChooseSeatScreenState extends State<ChooseSeatScreen> {
     BioskopNavigation().pop();
     BioskopNavigation().pop();
     BioskopNavigation().pop();
-    BioskopNavigation().pushReplacementNamed(HomeScreen.routeName);
+    BioskopNavigation().pushReplacementNamed(MainScreen.routeName);
   }
 
   Widget chooseSeat() {
@@ -229,8 +231,21 @@ class _ChooseSeatScreenState extends State<ChooseSeatScreen> {
             children: List.generate(listSeat[rowIndex].length, (seatIndex) {
               return buttonSeat(
                   seat: listSeat[rowIndex][seatIndex],
-                  rowIndex: rowIndex,
-                  seatIndex: seatIndex);
+                  seatIndex: seatIndex,
+                  onTap: () {
+                    if (availableSeat.contains(listSeat[rowIndex][seatIndex])) {
+                      if (selectedSeat
+                          .contains(listSeat[rowIndex][seatIndex])) {
+                        setState(() {
+                          selectedSeat.remove(listSeat[rowIndex][seatIndex]);
+                        });
+                      } else {
+                        setState(() {
+                          selectedSeat.add(listSeat[rowIndex][seatIndex]);
+                        });
+                      }
+                    }
+                  });
             }).toList(),
           );
         }),
@@ -239,32 +254,22 @@ class _ChooseSeatScreenState extends State<ChooseSeatScreen> {
   }
 
   Widget buttonSeat(
-      {required String seat, required int rowIndex, required int seatIndex}) {
+      {required String seat,
+      required int seatIndex,
+      required void Function() onTap}) {
     return Row(
       children: [
         if (seatIndex == 0) const SizedBox(width: 20),
         if (seatIndex == 5) const SizedBox(width: 50),
         GestureDetector(
-          onTap: () {
-            if (isAvailableSeat[rowIndex][seatIndex]) {
-              if (selectedSeat.contains(seat)) {
-                setState(() {
-                  selectedSeat.remove(seat);
-                });
-              } else {
-                setState(() {
-                  selectedSeat.add(seat);
-                });
-              }
-            }
-          },
+          onTap: onTap,
           child: Container(
             width: 30,
             height: 30,
             alignment: Alignment.center,
             margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
             decoration: BoxDecoration(
-                color: !isAvailableSeat[rowIndex][seatIndex]
+                color: !availableSeat.contains(seat)
                     ? ColorDir.primaryAccent
                     : selectedSeat.contains(seat)
                         ? ColorDir.secondaryColor
@@ -272,10 +277,10 @@ class _ChooseSeatScreenState extends State<ChooseSeatScreen> {
                 borderRadius: BorderRadius.circular(5)),
             child: Text(seat,
                 style: TextStyle(
-                    color: !isAvailableSeat[rowIndex][seatIndex]
-                        ? ColorDir.whiteAccent2
-                        : ColorDir.whiteColor,
-                    fontWeight: isAvailableSeat[rowIndex][seatIndex]
+                    color: availableSeat.contains(seat)
+                        ? ColorDir.whiteColor
+                        : ColorDir.whiteAccent2,
+                    fontWeight: availableSeat.contains(seat)
                         ? FontWeight.bold
                         : FontWeight.normal)),
           ),

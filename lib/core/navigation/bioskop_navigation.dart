@@ -17,6 +17,7 @@ class BioskopNavigation {
     SplashScreen.routeName: (context) => const SplashScreen(),
     LoginScreen.routeName: (context) => const LoginScreen(),
     RegisterScreen.routeName: (context) => const RegisterScreen(),
+    MainScreen.routeName: (context) => const MainScreen(),
     HomeScreen.routeName: (context) => const HomeScreen(),
     ProfileScreen.routeName: (context) => const ProfileScreen(),
     MovieDirectoryScreen.routeName: (context) => const MovieDirectoryScreen(),

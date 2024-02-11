@@ -26,8 +26,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
     super.dispose();
   }
 
-  List<bool> isSelectedCinema = List.filled(listCinema.length, false);
-
+  CinemaModel selectedCinema = listCinema[0];
   final List<String> dayID = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
   final List<Color> colorCardDate = [
     ColorDir.whiteAccent2,
@@ -45,18 +44,15 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
   List<String> showDay = [];
   final List<String> showTime = ['12:15', '15:30', '18:00', '21:00'];
 
-  List<bool> isSelectedTime = [];
-  List<bool> isExpiredTime = [];
+  String selectedTime = '';
+  List<String> expiredTime = [];
 
   @override
   void initState() {
-    isSelectedCinema[0] = true;
-    _selectedDate(date: today);
+    _selectDate(date: today);
 
-    isSelectedTime = List.filled(showTime.length, false);
-    isExpiredTime = List.filled(showTime.length, false);
-    isSelectedTime[1] = true;
-    isExpiredTime[0] = true;
+    selectedTime = showTime[1];
+    expiredTime.add(showTime[0]);
     super.initState();
   }
 
@@ -121,7 +117,16 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                   children: List.generate(
                       listCinema.length,
                       (index) => cardCinema(
-                          cinemaModel: listCinema[index], index: index)),
+                          cinemaModel: listCinema[index],
+                          index: index,
+                          onTap: () {
+                            if (selectedCinema.title !=
+                                listCinema[index].title) {
+                              setState(() {
+                                selectedCinema = listCinema[index];
+                              });
+                            }
+                          })),
                 ),
               ),
               const SizedBox(height: 20),
@@ -141,17 +146,15 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                 BioskopNavigation()
                     .pushNamed(ChooseSeatScreen.routeName, arguments: {
                   'movieModel': movieModel,
-                  'cinemaModel': listCinema[
-                      isSelectedCinema.indexWhere((element) => element)],
-                  'selectedTime':
-                      showTime[isSelectedTime.indexWhere((element) => element)],
+                  'cinemaModel': selectedCinema,
+                  'selectedTime': selectedTime,
                   'selectedDate': showDate[3],
                 });
               })),
     );
   }
 
-  void _selectedDate({required DateTime date}) {
+  void _selectDate({required DateTime date}) {
     setState(() {
       showDate.clear();
       showDay.clear();
@@ -182,7 +185,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
             if (!date.isBefore(today) &&
                 !date.isAfter(limitDaysLater) &&
                 index != 3) {
-              _selectedDate(date: date);
+              _selectDate(date: date);
             }
           },
           child: Column(
@@ -216,16 +219,14 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
         ));
   }
 
-  Widget cardCinema({required CinemaModel cinemaModel, required int index}) {
+  Widget cardCinema(
+      {required CinemaModel cinemaModel,
+      required int index,
+      required void Function() onTap}) {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {
-            setState(() {
-              isSelectedCinema = List.filled(isSelectedCinema.length, false);
-              isSelectedCinema[index] = true;
-            });
-          },
+          onTap: onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -239,7 +240,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                   )
                 ],
               ),
-              isSelectedCinema[index]
+              selectedCinema.title == cinemaModel.title
                   ? const Icon(CupertinoIcons.chevron_up,
                       color: ColorDir.secondaryColor)
                   : const Icon(CupertinoIcons.chevron_down,
@@ -248,7 +249,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           ),
         ),
         const SizedBox(height: 12),
-        isSelectedCinema[index]
+        selectedCinema.title == cinemaModel.title
             ? Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 padding:
@@ -273,7 +274,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                       children: List.generate(
                         showTime.length,
                         (index) =>
-                            buttonShowTime(text: showTime[index], index: index),
+                            buttonShowTime(time: showTime[index], index: index),
                       ),
                     ),
                   ],
@@ -284,22 +285,21 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
     );
   }
 
-  Widget buttonShowTime({required String text, required int index}) {
+  Widget buttonShowTime({required String time, required int index}) {
     return GestureDetector(
       onTap: () {
-        if (isExpiredTime[index] != true) {
+        if (!expiredTime.contains(time) && selectedTime != time) {
           setState(() {
-            isSelectedTime = List.filled(isSelectedTime.length, false);
-            isSelectedTime[index] = true;
+            selectedTime = time;
           });
         }
       },
       child: Container(
         decoration: BoxDecoration(
-            color: isSelectedTime[index]
-                ? ColorDir.secondaryColor
-                : isExpiredTime[index]
-                    ? ColorDir.primaryAccent
+            color: expiredTime.contains(time)
+                ? ColorDir.primaryAccent
+                : selectedTime == time
+                    ? ColorDir.secondaryColor
                     : ColorDir.whiteAccent2,
             borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.symmetric(
@@ -307,12 +307,14 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           vertical: 6,
         ),
         child: Text(
-          text,
+          time,
           style: TextStyle(
-              color: isExpiredTime[index]
-                  ? ColorDir.whiteAccent4
+              color: expiredTime.contains(time)
+                  ? ColorDir.whiteAccent2
                   : ColorDir.whiteColor,
-              fontWeight: FontWeight.bold),
+              fontWeight: expiredTime.contains(time)
+                  ? FontWeight.normal
+                  : FontWeight.bold),
         ),
       ),
     );

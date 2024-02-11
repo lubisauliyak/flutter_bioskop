@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bioskop/core/navigation/bioskop_navigation.dart';
 import 'package:flutter_bioskop/data/home/dummy_movie.dart';
 import 'package:flutter_bioskop/models/home/movie_model.dart';
+import 'package:flutter_bioskop/screens/content/buy_ticket_screen.dart';
+import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -195,7 +197,15 @@ class _MovieListScreenState extends State<MovieDirectoryScreen> {
                             color: ColorDir.whiteAccent4, fontSize: 12)),
                   ],
                 ),
-                SizedBox(height: 30, width: 90, child: buttonCard(onTap: () {}))
+                SizedBox(
+                    height: 30,
+                    width: 90,
+                    child: buttonCard(onTap: () {
+                      BioskopNavigation().pop();
+                      BioskopNavigation().pushNamed(
+                          DetailContentScreen.routeName,
+                          arguments: {'movieModel': movieModel});
+                    }))
               ],
             ),
           )

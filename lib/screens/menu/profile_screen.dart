@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       const Text(
-                        'Sejak 8 Februari 2024',
+                        'Sejak 10 Februari 2024',
                         style: TextStyle(
                           color: ColorDir.whiteColor,
                           fontSize: 12,
@@ -87,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                   cardMenuProfile(title: 'Simpan'),
                   cardMenuProfile(title: 'Riwayat'),
                   cardMenuProfile(title: 'Peringkat'),
-                  cardMenuProfile(title: 'Pusat Dukungan'),
+                  cardMenuProfile(title: 'Pusat Bantuan'),
                 ],
               ),
             ),

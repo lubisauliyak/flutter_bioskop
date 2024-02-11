@@ -111,6 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onTapButtonLogin() {
-    BioskopNavigation().pushReplacementNamed(HomeScreen.routeName);
+    BioskopNavigation().pushReplacementNamed(MainScreen.routeName);
   }
 }

@@ -9,9 +9,116 @@ import 'package:flutter_bioskop/models/home/movie_model.dart';
 import 'package:flutter_bioskop/models/home/voucher_model.dart';
 import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
 import 'package:flutter_bioskop/screens/content/movie_directory_screen.dart';
+import 'package:flutter_bioskop/screens/menu/profile_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
+import 'package:flutter_bioskop/utils/svg_dir.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
+
+class MainScreen extends StatefulWidget {
+  static const routeName = '/main-screen';
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedScreen = 0;
+  List<Widget> listScreenMenu = [
+    const HomeScreen(),
+    _customScreen(title: 'Tiket'),
+    _customScreen(title: 'Bioskop'),
+    const ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: listScreenMenu[_selectedScreen],
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          iconSize: 20,
+          selectedFontSize: 14,
+          backgroundColor: ColorDir.primaryAccent,
+          selectedItemColor: ColorDir.yellowColor,
+          unselectedItemColor: ColorDir.whiteColor,
+          onTap: _onTapNavbar,
+          currentIndex: _selectedScreen,
+          items: [
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                SvgDir.home,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  _selectedScreen == 0
+                      ? ColorDir.yellowColor
+                      : ColorDir.whiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                SvgDir.ticket,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  _selectedScreen == 1
+                      ? ColorDir.yellowColor
+                      : ColorDir.whiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: 'Tiket',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                SvgDir.cinema,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  _selectedScreen == 2
+                      ? ColorDir.yellowColor
+                      : ColorDir.whiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: 'Bioskop',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                SvgDir.profile,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  _selectedScreen == 3
+                      ? ColorDir.yellowColor
+                      : ColorDir.whiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: 'Profil',
+            ),
+          ]),
+    );
+  }
+
+  void _onTapNavbar(int index) {
+    setState(() {
+      _selectedScreen = index;
+    });
+  }
+
+  static Widget _customScreen({required String title}) {
+    return Center(
+      child: Text(title,
+          style: const TextStyle(
+              color: ColorDir.whiteColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold)),
+    );
+  }
+}
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home-screen';
