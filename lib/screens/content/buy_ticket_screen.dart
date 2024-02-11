@@ -28,13 +28,31 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
 
   List<bool> isSelectedCinema = List.filled(listCinema.length, false);
 
-  List<String> showTime = ['12:15', '15:30', '18:00', '21:00'];
+  final List<String> dayID = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+  final List<Color> colorCardDate = [
+    ColorDir.whiteAccent2,
+    ColorDir.whiteAccent4,
+    ColorDir.whiteAccent6,
+    ColorDir.whiteColor,
+    ColorDir.whiteAccent6,
+    ColorDir.whiteAccent4,
+    ColorDir.whiteAccent2
+  ];
+  DateTime now = DateTime.now();
+  late DateTime today = DateTime(now.year, now.month, now.day);
+  late DateTime limitDaysLater = today.add(const Duration(days: 14));
+  List<DateTime> showDate = [];
+  List<String> showDay = [];
+  final List<String> showTime = ['12:15', '15:30', '18:00', '21:00'];
+
   List<bool> isSelectedTime = [];
   List<bool> isExpiredTime = [];
 
   @override
   void initState() {
     isSelectedCinema[0] = true;
+    _selectedDate(date: today);
+
     isSelectedTime = List.filled(showTime.length, false);
     isExpiredTime = List.filled(showTime.length, false);
     isSelectedTime[1] = true;
@@ -67,6 +85,21 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: List.generate(
+                      showDate.length,
+                      (index) => cardDate(
+                          day: showDay[index],
+                          date: showDate[index],
+                          color: colorCardDate[index],
+                          index: index)),
+                ),
+              ),
               const SizedBox(height: 20),
               Container(
                 height: 2,
@@ -109,6 +142,69 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                     arguments: {'movieModel': movieModel});
               })),
     );
+  }
+
+  void _selectedDate({required DateTime date}) {
+    setState(() {
+      showDate.clear();
+      showDay.clear();
+      for (int i = -3; i < 0; i++) {
+        DateTime currentDate = date.add(Duration(days: i));
+        showDate.add(currentDate);
+        showDay.add(dayID[currentDate.weekday - 1]);
+      }
+      showDate.add(date);
+      showDay.add(dayID[date.weekday - 1]);
+      for (int i = 1; i <= 3; i++) {
+        DateTime currentDate = date.add(Duration(days: i));
+        showDate.add(currentDate);
+        showDay.add(dayID[currentDate.weekday - 1]);
+      }
+    });
+  }
+
+  Widget cardDate(
+      {required String day,
+      required DateTime date,
+      required Color color,
+      required int index}) {
+    return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          onTap: () {
+            if (!date.isBefore(today) &&
+                !date.isAfter(limitDaysLater) &&
+                index != 3) {
+              _selectedDate(date: date);
+            }
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                (!date.isBefore(today) && !date.isAfter(limitDaysLater))
+                    ? day
+                    : '',
+                style: TextStyle(
+                    color: color,
+                    fontSize: (index == 3) ? 16 : 14,
+                    fontWeight:
+                        (index == 3) ? FontWeight.bold : FontWeight.normal),
+              ),
+              if (index == 3) const SizedBox(height: 6),
+              Text(
+                (!date.isBefore(today) && !date.isAfter(limitDaysLater))
+                    ? date.toString().substring(8, 10)
+                    : '',
+                style: TextStyle(
+                    color: color,
+                    fontSize: (index == 3) ? 18 : 14,
+                    fontWeight:
+                        (index == 3) ? FontWeight.bold : FontWeight.normal),
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget cardCinema({required CinemaModel cinemaModel, required int index}) {
