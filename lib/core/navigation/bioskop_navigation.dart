@@ -4,7 +4,7 @@ import 'package:flutter_bioskop/screens/auth/register_screen.dart';
 import 'package:flutter_bioskop/screens/content/buy_ticket_screen.dart';
 import 'package:flutter_bioskop/screens/content/choose_seat_screen.dart';
 import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
-import 'package:flutter_bioskop/screens/content/movie_directory_screen.dart';
+import 'package:flutter_bioskop/screens/content/directory_movie_screen.dart';
 import 'package:flutter_bioskop/screens/menu/home_screen.dart';
 import 'package:flutter_bioskop/screens/menu/profile_screen.dart';
 import 'package:flutter_bioskop/screens/splash_screen.dart';

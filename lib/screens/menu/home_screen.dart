@@ -8,7 +8,7 @@ import 'package:flutter_bioskop/models/home/banner_model.dart';
 import 'package:flutter_bioskop/models/home/movie_model.dart';
 import 'package:flutter_bioskop/models/home/voucher_model.dart';
 import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
-import 'package:flutter_bioskop/screens/content/movie_directory_screen.dart';
+import 'package:flutter_bioskop/screens/content/directory_movie_screen.dart';
 import 'package:flutter_bioskop/screens/menu/profile_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_bioskop/utils/image_dir.dart';
