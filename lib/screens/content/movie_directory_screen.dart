@@ -142,8 +142,7 @@ class _MovieListScreenState extends State<MovieDirectoryScreen> {
             ),
           ),
           const SizedBox(width: 20),
-          SizedBox(
-            width: 250,
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
