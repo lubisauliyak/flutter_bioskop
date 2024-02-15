@@ -20,7 +20,7 @@ class BioskopNavigation {
     MainScreen.routeName: (context) => const MainScreen(),
     HomeScreen.routeName: (context) => const HomeScreen(),
     ProfileScreen.routeName: (context) => const ProfileScreen(),
-    MovieDirectoryScreen.routeName: (context) => const MovieDirectoryScreen(),
+    DirectoryMovieScreen.routeName: (context) => const DirectoryMovieScreen(),
     DetailContentScreen.routeName: (context) => const DetailContentScreen(),
     BuyTicketScreen.routeName: (context) => const BuyTicketScreen(),
     ChooseSeatScreen.routeName: (context) => const ChooseSeatScreen(),

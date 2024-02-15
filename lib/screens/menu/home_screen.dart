@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     GestureDetector(
                       onTap: () {
                         BioskopNavigation()
-                            .pushNamed(MovieDirectoryScreen.routeName);
+                            .pushNamed(DirectoryMovieScreen.routeName);
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

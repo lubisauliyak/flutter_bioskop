@@ -6,15 +6,15 @@ import 'package:flutter_bioskop/screens/content/detail_content_screen.dart';
 import 'package:flutter_bioskop/utils/color_dir.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class MovieDirectoryScreen extends StatefulWidget {
+class DirectoryMovieScreen extends StatefulWidget {
   static const routeName = '/movie-directory-screen';
-  const MovieDirectoryScreen({super.key});
+  const DirectoryMovieScreen({super.key});
 
   @override
-  State<MovieDirectoryScreen> createState() => _MovieListScreenState();
+  State<DirectoryMovieScreen> createState() => _MovieListScreenState();
 }
 
-class _MovieListScreenState extends State<MovieDirectoryScreen> {
+class _MovieListScreenState extends State<DirectoryMovieScreen> {
   Map<CategoryRelease, String> categoryRelease = {
     CategoryRelease.inComing: 'Sedang Tayang',
     CategoryRelease.upComing: 'Akan Tayang',
